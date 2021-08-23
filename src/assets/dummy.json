@@ -1,0 +1,30 @@
+ [
+     {
+         "id": "1",
+         "nombre": "Sprite",
+         "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
+         "sku": "1",
+         "precio": "20"
+     },
+     {
+         "id": "2",
+         "nombre": "Coca",
+         "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
+         "sku": "2",
+         "precio": "20"
+     },
+     {
+         "id": "3",
+         "nombre": "Sabritas",
+         "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
+         "sku": "3",
+         "precio": "12"
+     },
+     {
+         "id": "4",
+         "nombre": "Pan bimbo",
+         "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
+         "sku": "4",
+         "precio": "60"
+     }
+ ]
