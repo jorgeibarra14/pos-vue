@@ -2,34 +2,57 @@
   <q-page class="bg-grey-3 pagina">
     <div class="q-pa-md bg-grey-3">
       <div class="row q-pa-md div-padre bg-white">
-        <div class="col-9 prods">
+
+        <div class="col-8 prods">
           <div class="col-12">
             <div class="flex flex-center q-pa-md col-12">
-              <q-input type="text" style="width: 100%" v-model="sku" @change="searchAndAdd()" autofocus filled label="buscar"></q-input>
+              <q-input type="text" style="width: 100%" v-model="sku" @change="searchAndAdd()" autofocus filled
+                label="buscar"></q-input>
             </div>
           </div>
           <div class="row productos">
-
+            <div v-for="(item, index) in info" class="col-4" :key="item.id">
+              <ItemVue :title="item.nombre" :src="index" :sku="item.sku" :precio="item.precio" />
+            </div>
           </div>
         </div>
-        <div class="col-3 lista">
-          <q-table style="width: 100%; height: 50vh" :rows="rows" :columns="columns" row-key="name" />
+
+        <div class="col-4 lista">
+          <q-table :hide-pagination="true" elevation="100" virtual-scroll style="width: 100%; height: 50vh" :rows="rows"
+            :columns="columns" row-key="name">
+            <template v-slot:body-cell-actions="props">
+              <q-td :props="props">
+                <q-btn dense round flat color="grey"  icon="delete"></q-btn>
+              </q-td>
+            </template>
+          </q-table>
           <div class="row cart">
           </div>
           <div class="row totales">
-            <div class="row">
-              <div class="col-6" style="text-align:left; font-weight: bold;">Productos:</div>
-              <div class="col-6" style="text-align: right; font-weight: bold;" id="total_productos"></div>
-            </div>
-            <div class="row">
-              <div class="col-6" style="text-align:left; font-weight: bold;">Total:</div>
-              <div class="col-6" style="text-align: right; font-weight: bold;" id="total"></div>
-            </div>
-            <div class="row">
+            <div class="row q-pa-xs" style="width: 100%">
+              <div class="col-6" style="text-align:left; font-weight: bold;">RECIBIDO:</div>
+              <div class="col-6" style="text-align: right; font-weight: bold;">$ 100</div>
+
+              <div class="col-6" style="text-align:left; font-weight: bold;">CAMBIO:</div>
+              <div class="col-6" style="text-align: right; font-weight: bold;">$ 0</div>
 
             </div>
           </div>
+          <div class="row">
+            <div class="col-12" style="text-align: right; font-weight: bold;" id="total">
+              <button tabindex="0" type="button" role="button"
+                class="q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-positive text-white q-btn--actionable q-focusable q-hoverable q-btn--wrap"
+                style="width: 100%;"><span class="q-focus-helper"></span><span
+                  class="q-btn__wrapper col row q-anchor--skip"><span
+                    class="q-btn__content text-center col items-center q-anchor--skip justify-center column"><span
+                      class="block">TOTAL:</span><strong>$72,000.00</strong></span></span></button>
+            </div>
+          </div>
+          <div class="row">
+
+          </div>
         </div>
+
       </div>
     </div>
   </q-page>
@@ -40,37 +63,43 @@
     defineComponent
   } from 'vue';
 
-import axios from 'axios'
+  import ItemVue from 'components/Item.vue'
+  import axios from 'axios'
   export default defineComponent({
+    components: {
+      ItemVue
+    },
     name: 'Pos',
     created() {
-        this.printList();
+      this.printList();
     },
     data() {
       return {
-          info: [],
+        info: [],
         columns: [{
             name: 'nombre',
-            align: 'center',
+            align: 'left',
             label: 'Nombre',
             field: 'nombre',
             sortable: false
           },
           {
             name: 'cantidad',
+            align: 'right',
             label: 'Cant.',
             field: 'cantidad',
             sortable: false
           },
           {
             name: 'precio',
+            align: 'right',
             label: 'Precio',
             field: 'precio'
           },
           {
-            name: 'eliminar',
+            name: 'actions',
             label: '',
-            field: 'protein'
+            field: 'actions'
           }
         ],
         rows: [],
@@ -78,94 +107,75 @@ import axios from 'axios'
       }
     },
     methods: {
-        searchAndAdd() {
-            // api.get('/areas').then(({ data }) => {
-            //     this.data = data.areas
-            //     this.$q.loading.hide()
-            // })
-            // console.log(__dirname + 'public');
-            // axios.get('@/assets/dummy.json').then((response) => {
-            //     console.log(response.data)
-            // }).catch(e => {
-            //     console.log(response.data)
-            // })
-            // axios
-            // .get()
-            // .then(response => { console.log(response)});
-            const info =  [
-                            {
-                                "id": "1",
-                                "nombre": "Sprite",
-                                "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
-                                "sku": "1",
-                                "precio": "20"
-                            },
-                            {
-                                "id": "2",
-                                "nombre": "Coca",
-                                "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
-                                "sku": "2",
-                                "precio": "20"
-                            },
-                            {
-                                "id": "3",
-                                "nombre": "Sabritas",
-                                "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
-                                "sku": "3",
-                                "precio": "12"
-                            },
-                            {
-                                "id": "4",
-                                "nombre": "Pan bimbo",
-                                "img": "http://pngimg.com/uploads/sprite/sprite_PNG8920.png",
-                                "sku": "4",
-                                "precio": "60"
-                            }
-                        ]
-                        const data = info.filter(i => i.id == this.sku);
-                        this.addToCart(data)
-        },
-        addToCart(e) {
+      deleteSelectedRow(a) {
 
-            var productoJson = e[0];
+      },
+      axiosTest() {
+        var config = {
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        };
+        // create a promise for the axios request
+        const url = 'https://localhost:44308/api/Productos/' + this.sku;
+        const promise = axios.get(url, null, config)
 
-            var carrito = localStorage.getItem('carrito');
-            productoJson.cantidad = 1;
+        // using .then, create a new promise which extracts the data
+        const dataPromise = promise.then((response) => response.data)
 
-            var carritoTemporal = [];
-            if (carrito == null || carrito == "" || carrito == undefined) {
+        // return it
+        return dataPromise
+      },
+      searchAndAdd() {
+        this.axiosTest()
+          .then(data => {
+            this.info = data;
+            this.addToCart(data[0])
+          })
+          .catch(err => console.log(err))
+      },
+      addToCart(e) {
+        var productoJson = e;
+
+        var carrito = localStorage.getItem('carrito');
+        productoJson.cantidad = 1;
+
+        var carritoTemporal = [];
+        if (carrito == null || carrito == "" || carrito == undefined) {
+          carritoTemporal.push(productoJson);
+
+        } else {
+          var badera = true;
+          carritoTemporal = JSON.parse(carrito);
+          carritoTemporal.forEach(item => {
+            if (item.id == productoJson.id) {
+              badera = false;
+            }
+          });
+          if (badera) {
             carritoTemporal.push(productoJson);
 
-            } else {
-            var badera = true;
-            carritoTemporal = JSON.parse(carrito);
-            carritoTemporal.forEach(item => {
-                if (item.id == productoJson.id) {
-                badera = false;
-                }
-            });
-            if (badera) {
-                carritoTemporal.push(productoJson);
+          } else {
 
-            } else {
+            var carr = carritoTemporal.filter(item => item.id == productoJson.id);
+            console.log(carr);
+            productoJson.cantidad = carr[0].cantidad + 1;
 
-                var carr = carritoTemporal.filter(item => item.id == productoJson.id);
-                console.log(carr);
-                productoJson.cantidad = carr[0].cantidad + 1;
-
-                carritoTemporal = carritoTemporal.filter(item => item.id != productoJson.id);
-                carritoTemporal.push(productoJson);
-                this.printList();
-            }
-            }
-
-            localStorage.setItem('carrito', JSON.stringify(carritoTemporal));
+            carritoTemporal = carritoTemporal.filter(item => item.id != productoJson.id);
+            carritoTemporal.push(productoJson);
             this.printList();
-        },
-        printList() {
-            const data = JSON.parse(localStorage.getItem('carrito'));
-            this.rows = data;            
+          }
         }
+
+        localStorage.setItem('carrito', JSON.stringify(carritoTemporal));
+        this.printList();
+      },
+      printList() {
+        const data = JSON.parse(localStorage.getItem('carrito'));
+        if (data != null) {
+          this.rows = data;
+        }
+      }
     }
   })
 
