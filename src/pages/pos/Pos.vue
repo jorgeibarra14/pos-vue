@@ -22,7 +22,7 @@
             :columns="columns" row-key="name">
             <template v-slot:body-cell-actions="props">
               <q-td :props="props">
-                <q-btn dense round flat color="negative"  icon="delete">
+                <q-btn dense round flat color="negative"  icon="delete" @click="deleteSelectedRow(props.row.index)">
                   <q-tooltip class="bg-red">Eliminar</q-tooltip>
                 </q-btn>
               </q-td>
@@ -109,7 +109,10 @@
       }
     },
     methods: {
-      deleteSelectedRow(a) {
+      deleteSelectedRow(index) {
+        this.rows.splice(index,1);
+        localStorage.setItem('carrito', JSON.stringify(this.rows))
+        this.printList();
 
       },
       axiosTest() {
@@ -176,6 +179,8 @@
         const data = JSON.parse(localStorage.getItem('carrito'));
         if (data != null) {
           this.rows = data;
+        }else{
+          this.rows = [];
         }
       }
     }
