@@ -9,10 +9,10 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>
-          Title
+          Sistema Punto de Venta
         </q-toolbar-title>
-
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        {{email}}
+        <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
       </q-toolbar>
     </q-header>
 
@@ -37,13 +37,13 @@
 <script>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
-
+import { Cookies } from 'quasar'
 const linksList = [
   {
     title: 'Inicio',
     caption: 'Inicio del sistema',
     icon: 'home',
-    link: '/pages/Error404.vue'
+    link: '/home'
   },
   {
     title: 'POS',
@@ -55,6 +55,11 @@ const linksList = [
 export default {
   components: {
     EssentialLink
+  },
+  data () {
+    return { 
+        email: Cookies.get('.quasarCookie').userName
+    }
   },
   setup () {
     const leftDrawerOpen = ref(false)
