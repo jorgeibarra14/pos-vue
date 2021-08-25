@@ -57,8 +57,9 @@ export default {
     EssentialLink
   },
   data () {
-    return { 
-        email: Cookies.get('.quasarCookie').userName
+    return {
+      email: ''
+        //email: Cookies.get('.quasarCookie').userName
     }
   },
   setup () {

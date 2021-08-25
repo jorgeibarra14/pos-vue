@@ -7,7 +7,7 @@
           <div class="col-12">
             <div class="flex flex-center q-pa-md col-12">
               <q-input type="text" style="width: 100%" v-model="sku" @change="searchAndAdd()" autofocus filled
-                label="buscar"></q-input>
+                label="Buscar producto"></q-input>
             </div>
           </div>
           <div class="row productos">
@@ -22,7 +22,9 @@
             :columns="columns" row-key="name">
             <template v-slot:body-cell-actions="props">
               <q-td :props="props">
-                <q-btn dense round flat color="grey"  icon="delete"></q-btn>
+                <q-btn dense round flat color="negative"  icon="delete">
+                  <q-tooltip class="bg-red">Eliminar</q-tooltip>
+                </q-btn>
               </q-td>
             </template>
           </q-table>

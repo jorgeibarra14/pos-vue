@@ -12,7 +12,7 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/pos', component: () => import('pages/pos/Pos.vue') }
     ],
-    beforeEnter: requireAuth
+    //beforeEnter: requireAuth
   },
 
   // Always leave this as last one,
@@ -29,7 +29,7 @@ const routes = [
 // });
 function requireAuth(to, from, next) {
   var value = Cookies.get('.quasarCookie')
-  
+
   // var cookies = Cookies.all()
   // console.log(".AspNetCore.Identity.Application", value);
   console.log(value)
