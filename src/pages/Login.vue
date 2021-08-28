@@ -1,28 +1,28 @@
 <template>
 <q-layout>
-  <q-page class="bg-light-green window-height window-width row justify-center items-center">
-    <div class="column">
-      <div class="row">
-        <h5 class="text-h5 text-white q-my-md">Iniciar Sesión</h5>
+  <q-page-container style="background: white;">
+    <q-page>
+      <div class="row justify-center" style="padding-top: 5%;">
+          <img src="https://v0-17.quasar-framework.org/images/quasar-logo-big.png" alt="Iniciar Sesión" width="300">
+        </div>
+        <div class="row justify-center">
+          <div class="col-sm-4 q-pa-md">
+            <div class="row q-col-gutter-xs ">
+              <div class="col-xs-12 col-sm-12 loginstyle">
+                <q-input v-model="email" filled label="Correo electrónico" type="email" v-on:keyup.enter="login()" />
+              </div>
+              <div class="col-xs-12 col-sm-12 loginstyle">
+                <q-input v-model="password" filled label="Contraseña" :type="isPwd ? 'password' : 'text'" v-on:keyup.enter="login()">
+                </q-input>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 q-mt-sm pull-right">
+                <q-btn color="primary" label="Iniciar sesión" :loading="loading" @click="login()" />
+              </div>
+        </div>
       </div>
-      <div class="row">
-        <q-card square bordered class="q-pa-lg shadow-1">
-          <q-card-section>
-            <q-form class="q-gutter-md">
-              <q-input square filled clearable v-model="email" type="email" label="Correo" />
-              <q-input square filled clearable v-model="password" type="password" label="Contraseña" />
-            </q-form>
-          </q-card-section>
-          <q-card-actions class="q-px-md">
-            <q-btn unelevated color="light-green-7" @click="login()" size="lg" class="full-width" label="Iniciar Sesión" />
-          </q-card-actions>
-          <q-card-section class="text-center q-pa-none">
-            <!-- <p class="text-grey-6">Not reigistered? Created an Account</p> -->
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-  </q-page>
+    </q-page>
+  </q-page-container>
   </q-layout>
 </template>
 
@@ -43,13 +43,14 @@ export default {
               email: this.email,
               password: this.password
           }
-          axios.post('https://localhost:44308/api/account/login', params).then(r=> {
-              let data = JSON.stringify(r.data);
-                    Cookies.set('.quasarCookie', data, {
-                        secure: true
-                        })
-                    this.$router.push({ path: 'home' })          
-                })
+          // axios.post('https://localhost:44308/api/account/login', params).then(r=> {
+          //     let data = JSON.stringify(r.data);
+          //           Cookies.set('.quasarCookie', data, {
+          //               secure: true
+          //               })
+          //       })
+                    this.$router.push({ path: 'home' })
+
       }
   }
 }
