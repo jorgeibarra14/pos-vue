@@ -10,7 +10,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
-      { path: '/pos', component: () => import('pages/pos/Pos.vue') }
+      { path: '/pos', component: () => import('pages/pos/Pos.vue') },
+      { path: '/productos', component: () => import('pages/catalogos/Productos.vue') },
     ],
     beforeEnter: requireAuth
   },

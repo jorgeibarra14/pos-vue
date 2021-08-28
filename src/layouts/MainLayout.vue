@@ -50,6 +50,12 @@ const linksList = [
     caption: 'Sistema de venta',
     icon: 'store',
     link: '/pos'
+  },
+    {
+    title: 'Productos',
+    caption: 'Catálogo de productos',
+    icon: 'inventory_2',
+    link: '/productos'
   }
 ];
 export default {
