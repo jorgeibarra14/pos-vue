@@ -1,5 +1,19 @@
 <template>
   <q-page class="bg-grey-3 pagina">
+    <div id="breadcrum" class="q-pa-sm bg-white">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="q-pa-md q-gutter-sm">
+            <q-breadcrumbs align="left" style="font-size: 18px">
+              <q-breadcrumbs-el label="" icon="home" to="/home" />
+              <q-breadcrumbs-el label="Ventas" />
+            </q-breadcrumbs>
+          </div>
+        </div>
+        <div class="col-sm-4 pull-right">
+        </div>
+      </div>
+    </div>
     <div class="q-pa-md bg-grey-3">
       <div class="row q-pa-md div-padre bg-white">
 

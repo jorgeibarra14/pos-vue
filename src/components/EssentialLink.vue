@@ -1,26 +1,51 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target="_self"
-    :to="link"
-  >
-    <q-item-section
-      v-if="icon"
-      avatar
+  <q-list class="menu-list q-pt-xs">
+      <!-- <q-expansion-item
+        expand-separator
+        label="Catálogos"
+        >
+        <q-item
+        clickable
+        tag="a"
+        target="_self"
+        :to="link">
+            <q-item-section
+            v-if="icon"
+            avatar>
+              <q-icon :name="icon"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ title }}</q-item-label>
+            </q-item-section>
+          </q-item>
+      </q-expansion-item> -->
+    <q-item
+      clickable
+      tag="a"
+      target="_self"
+      :to="link"
     >
-      <q-icon :name="icon" />
-    </q-item-section>
+      <q-item-section
+        v-if="icon"
+        avatar
+      >
+        <q-icon :name="icon" />
+      </q-item-section>
 
-    <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>
-        {{ caption }}
-      </q-item-label>
-    </q-item-section>
-  </q-item>
+      <q-item-section>
+        <q-item-label>{{ title }}</q-item-label>
+        <q-item-label caption>
+          {{ caption }}
+        </q-item-label>
+      </q-item-section>
+    </q-item>
+  </q-list>
 </template>
-
+<style lang="sass" scoped>
+.menu-list .q-item
+  border-radius: 0 32px 32px 0
+  font-size: 18px
+</style>
 <script>
 import { defineComponent } from 'vue'
 

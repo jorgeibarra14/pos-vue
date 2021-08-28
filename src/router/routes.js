@@ -12,6 +12,7 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/pos', component: () => import('pages/pos/Pos.vue') },
       { path: '/productos', component: () => import('pages/catalogos/Productos.vue') },
+      { path: '/productos/new', component: () => import('pages/catalogos/ProductosNew.vue') },
     ],
     //beforeEnter: requireAuth
   },

@@ -15,7 +15,8 @@
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
     "vue-axios": "^3.2.5",
-    "vue-cookies": "^1.7.4"
+    "vue-cookies": "^1.7.4",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
